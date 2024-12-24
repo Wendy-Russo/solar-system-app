@@ -45,7 +45,7 @@ input[type="number"] {
   background-color:hsl(0, 0%, 5%,0.6);
   border: 1px solid hsl(0, 0%, 100%,0.1);
   border-radius: 1rem;
-  z-index: 9;
+  z-index: 99999;
   box-sizing: content-box;
   position: absolute;
   margin: 0.5rem;

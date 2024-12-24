@@ -76,15 +76,15 @@ function App() {
       position: new Vector(149600000000, 0),
       color: "hsl(210,100%,60%)", // Bright blue for Earth
       zIndex: 4,
-    },
-    {
+        },
+        {
       name: "Mars",
       atmosphere:true,
       radius: 3389.5,
       mass: 6.4171e23,
       velocity: new Vector(0, 24077, 0),
       position: new Vector(227900000000, 0),
-      color: "#EF693C", // Reddish-orange for Mars
+      color: "hsl(20, 80%, 50%)", // Reddish-orange for Mars
       zIndex: 5,
     },
     {
@@ -131,12 +131,13 @@ function App() {
 
   const [play,setPlay] = useState(true);
 
-  const changePlanetMass = (mult) => {
+  const changePlanetMass = (massMult,sizeMult = 1) => {
     setBody(prev => {
       const updatedBodies = [...prev]; // Clone the array
       updatedBodies[selected] = { 
         ...updatedBodies[selected], // Clone the selected object
-        mass: updatedBodies[selected].mass * (1 / mult) // Update the mass
+        mass: updatedBodies[selected].mass * massMult, // Update the mass
+        radius: updatedBodies[selected].radius * sizeMult // Update the mass
       };
       return updatedBodies; // Return the updated array
     })
@@ -211,7 +212,7 @@ function App() {
       }}
     >
       <Edit
-        play={true}
+        play={play}
         setPlay={setPlay}
         speed={speed}
         setSpeed={setSpeed}
@@ -224,6 +225,7 @@ function App() {
       {
         bodies.map((body, index) => (
           <Body
+            sunPos={bodies[0].position}
             key={index}
             radius={body.radius}
             position={body.position}

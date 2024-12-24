@@ -3,6 +3,7 @@ import Body from "./Views/Body";
 import { getAcceleration, getForce, getVelocity } from "./Physics/physicsUtils";
 import Star from "./Views/Star";
 import { Vector } from "./Physics/Vector";
+import Edit from "./Views/Edit";
 
 const startAmount = 1000;
 const stars = []
@@ -209,56 +210,17 @@ function App() {
         display: "flex",
       }}
     >
-      <div
-        className="controls"
-      >
-        <button
-          onClick={() => setPlay(play => !play)}
-        >
-          {play ? "Pause" : "Play"}
-        </button>
-        <span className="separator"/>
-        <button
-          onClick={() => setSpeed(speed => valToTime(timeToVal(speed) - 1))}
-        >
-          {"Slower"}
-        </button>
-        <div>
-          <p>
-            {timeToVal(speed)}
-          </p>
-        </div>
-        <button
-          onClick={() => setSpeed(speed => valToTime(timeToVal(speed) + 1))}
-        >
-          {"Faster"}
-        </button>
-        <span className="separator"/>
-        <p
-          className="massName"
-        >
-          {bodies[selected].name}
-        </p>
-        
-        <p
-        >
-          Mass: {bodies[selected].mass.toExponential(1)}
-        </p>
-        <div
-          className="massControls"
-        >
-          <button
-            onClick={() => changePlanetMass(1/1.5)}
-          >
-            {"+"}
-          </button>
-          <button
-            onClick={() => changePlanetMass(1.5)}
-          >
-            {"-"}
-          </button>
-        </div>
-      </div>
+      <Edit
+        play={true}
+        setPlay={setPlay}
+        speed={speed}
+        setSpeed={setSpeed}
+        timeToVal={timeToVal}
+        valToTime={valToTime}
+        bodies={bodies}
+        selected={selected}
+        changePlanetMass={changePlanetMass}
+      />
       {
         bodies.map((body, index) => (
           <Body
